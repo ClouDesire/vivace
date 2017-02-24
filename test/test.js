@@ -23,6 +23,16 @@ describe('loading express', () => {
       });
   });
 
+  const error = 'Missing `imgUrl` parameter';
+
+  it('imgUrl parameter is required', (done) => {
+    request(server).get('/').expect(400, error, done);
+  });
+
+  it('imgUrl parameter must not be empty', (done) => {
+    request(server).get('/?imgUrl=').expect(400, error, done);
+  });
+
   it('404 everything else', (done) => {
     request(server)
       .get('/foo/bar')

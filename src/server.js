@@ -8,7 +8,7 @@ const server = http.createServer(app);
 app.get('/', (req, res) => {
   const imgUrl = req.query.imgUrl;
 
-  if (imgUrl == undefined) {
+  if (imgUrl == undefined || imgUrl == '') {
     res.status(400).send('Missing `imgUrl` parameter');
     return;
   }
