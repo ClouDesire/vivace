@@ -8,7 +8,7 @@ describe('loading express', () => {
 
   afterEach(() => server.close());
 
-  it('responds to /', function testSlash(done) {
+  it('responds to /', (done) => {
     request(server)
       .get('/?imgUrl=https://appshop.cloud/images/marketplace/logo.png')
       .set('Accept', 'application/json')
@@ -23,7 +23,7 @@ describe('loading express', () => {
       });
   });
 
-  it('404 everything else', function testPath(done) {
+  it('404 everything else', (done) => {
     request(server)
       .get('/foo/bar')
       .expect(404, done);
