@@ -1,3 +1,11 @@
 machine:
   node:
     version: 6.10.0
+  services:
+    - docker
+
+deployment:
+  docker:
+    branch: master
+    commands:
+      - bash -e dockerbuild.sh
