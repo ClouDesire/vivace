@@ -22,9 +22,9 @@ app.get('/', (req, res) => {
   });
 });
 
-server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", () => {
+server.listen(process.env.PORT || 3000, process.env.IP || '0.0.0.0', () => {
   const addr = server.address();
-  console.log("Vivace listening at", addr.address + ":" + addr.port);
+  console.log('Vivace listening at', addr.address + ':' + addr.port);
 });
 
 module.exports = server;

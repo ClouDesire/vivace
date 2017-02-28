@@ -1,5 +1,5 @@
 const request = require('supertest');
-const should = require('should');
+require('should');
 
 describe('loading express', () => {
   let server;
