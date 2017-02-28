@@ -18,6 +18,8 @@ app.get('/', (req, res) => {
       res.status(500).send(err.toString());
     }
 
+    const maxAge = process.env.MAX_AGE || 1296000;  // 15 days
+    res.set('Cache-Control', 'public, max-age=' + maxAge);
     res.json(palette);
   });
 });

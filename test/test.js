@@ -15,6 +15,7 @@ describe('loading express', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .end((err, res) => {
+        res.headers.should.have.property('cache-control').equal('public, max-age=1296000');
         res.body.should.have.property('LightMuted');
         res.body.LightMuted.should.be.an.array;
         res.body.LightMuted.should.have.property('rgb');
