@@ -1,9 +1,12 @@
 const http = require('http');
 const express = require('express');
+const cors = require('cors');
 const Vibrant = require('node-vibrant');
 
 const app = express();
 const server = http.createServer(app);
+
+app.use(cors());
 
 app.get('/', (req, res) => {
   const imgUrl = req.query.imgUrl;
