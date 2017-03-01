@@ -5,7 +5,8 @@
   "main": "src/server.js",
   "dependencies": {
     "express": "^4.14.1",
-    "node-vibrant": "^2.1.2"
+    "node-vibrant": "^2.1.2",
+    "cors": "^2.8.1"
   },
   "devDependencies": {
     "should": "^11.2.0",
