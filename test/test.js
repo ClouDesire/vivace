@@ -25,6 +25,18 @@ describe('loading express', () => {
       });
   });
 
+  it('follows redirects', (done) => {
+    request(server)
+      .get('/?imgUrl=https://backend.cloudesire.com/api/productImageFile/static/883.png')
+      .expect(200)
+      .end((err, res) => {
+        res.body.should.have.property('LightMuted');
+        res.body.LightMuted.should.have.property('rgb');
+        res.body.LightMuted.rgb.should.containDeep([153, 170, 171]);
+        done();
+      });
+  });
+
   it('responds to preflight cors requests', (done) => {
     request(server)
       .options('/?imgUrl=https://appshop.cloud/images/marketplace/logo.png')
@@ -50,5 +62,11 @@ describe('loading express', () => {
     request(server)
       .get('/foo/bar')
       .expect(404, done);
+  });
+
+  it('500 when not 200 or 300', (done) => {
+    request(server)
+      .get('/?imgUrl=https://httpbin.org/status/418')
+      .expect(500, done);
   });
 });

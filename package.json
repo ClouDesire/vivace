@@ -4,9 +4,10 @@
   "description": "Extract prominent colors from an image",
   "main": "src/server.js",
   "dependencies": {
+    "cors": "^2.8.1",
     "express": "^4.14.1",
     "node-vibrant": "^2.1.2",
-    "cors": "^2.8.1"
+    "request": "^2.79.0"
   },
   "devDependencies": {
     "should": "^11.2.0",
