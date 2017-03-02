@@ -2,29 +2,50 @@ const http = require('http');
 const express = require('express');
 const cors = require('cors');
 const Vibrant = require('node-vibrant');
+const request = require('request');
 
 const app = express();
 const server = http.createServer(app);
 
 app.use(cors());
 
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
   const imgUrl = req.query.imgUrl;
 
   if (imgUrl == undefined || imgUrl == '') {
-    res.status(400).send('Missing `imgUrl` parameter');
-    return;
+    let err = new Error('missing `imgUrl` parameter');
+    err.status = 400;
+    throw err;
   }
 
-  Vibrant.from(imgUrl).getPalette((err, palette) => {
-    if (err != null) {
-      res.status(500).send(err.toString());
+  request({
+    url: imgUrl,
+    encoding: null
+  }, (error, response, body) => {
+    if (error != null) {
+      res.status(500).send(error);
+      return next(error);
     }
 
-    const maxAge = process.env.MAX_AGE || 1296000;  // 15 days
-    res.set('Cache-Control', 'public, max-age=' + maxAge);
-    res.json(palette);
+    Vibrant.from(body).getPalette((err, palette) => {
+      if (err != null) {
+        res.status(500).send(err.toString());
+        return next(err);
+      }
+
+      const maxAge = process.env.MAX_AGE || 1296000;  // 15 days
+      res.set('Cache-Control', 'public, max-age=' + maxAge);
+      res.json(palette);
+    });
   });
+});
+
+app.use(function(err, req, res, next) {
+  if (err.status !== 400) {
+    return next();
+  }
+
+  res.status(400).send(err.toString());
 });
 
 server.listen(process.env.PORT || 3000, process.env.IP || '0.0.0.0', () => {
