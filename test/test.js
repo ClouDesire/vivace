@@ -68,5 +68,5 @@ describe('loading express', () => {
     request(server)
       .get('/?imgUrl=https://httpbin.org/status/418')
       .expect(500, done);
-  });
+  }).timeout(5000);
 });
