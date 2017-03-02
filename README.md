@@ -1,15 +1,22 @@
-# vivace
+# vivace [![CircleCI](https://circleci.com/gh/ClouDesire/vivace.svg?style=svg)](https://circleci.com/gh/ClouDesire/vivace) [![Docker Pulls](https://img.shields.io/docker/pulls/cloudesire/vivace.svg?style=plastic)](https://hub.docker.com/r/cloudesire/vivace/) [![Docker Stars](https://img.shields.io/docker/stars/cloudesire/vivace.svg?style=plastic)](https://hub.docker.com/r/cloudesire/vivace/)
 
 > Extract prominent colors from an image
 
 It exposes [node-vibrant](https://www.npmjs.com/package/node-vibrant) image analysis results via JSON API.
+
+## Build
+
+Build with docker
+
+```sh
+$ docker build -t cloudesire/vivace .
+```
 
 ## Install
 
 Install with docker
 
 ```sh
-$ docker build -t cloudesire/vivace .
 $ docker run -p 8080:3000 -d cloudesire/vivace
 ```
 
