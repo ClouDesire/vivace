@@ -35,7 +35,7 @@ describe('loading express', () => {
         res.body.LightMuted.rgb.should.containDeep([153, 170, 171]);
         done();
       });
-  });
+  }).timeout(5000);
 
   it('responds to preflight cors requests', (done) => {
     request(server)
