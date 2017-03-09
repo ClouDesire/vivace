@@ -64,9 +64,9 @@ describe('loading express', () => {
       .expect(404, done);
   });
 
-  it('500 when not 200 or 300', (done) => {
+  it('400 when not 200 or 300', (done) => {
     request(server)
       .get('/?imgUrl=https://httpbin.org/status/418')
-      .expect(500, done);
+      .expect(400, done);
   }).timeout(5000);
 });
