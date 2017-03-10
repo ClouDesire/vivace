@@ -1,8 +1,8 @@
-const http = require('http');
-const express = require('express');
 const cors = require('cors');
-const Vibrant = require('node-vibrant');
+const express = require('express');
+const http = require('http');
 const request = require('request');
+const Vibrant = require('node-vibrant');
 
 const app = express();
 const server = http.createServer(app);
@@ -12,7 +12,7 @@ app.use(cors());
 app.get('/', (req, res, next) => {
   const imgUrl = req.query.imgUrl;
 
-  if (imgUrl == undefined || imgUrl == '') {
+  if (!imgUrl) {
     let err = new Error('missing `imgUrl` parameter');
     err.status = 400;
     throw err;
@@ -23,13 +23,13 @@ app.get('/', (req, res, next) => {
     encoding: null
   }, (error, response, body) => {
     if (error != null) {
-      res.status(500).send(error);
+      res.status(400).send(error);
       return next(error);
     }
 
     Vibrant.from(body).getPalette((err, palette) => {
       if (err != null) {
-        res.status(500).send(err.toString());
+        res.status(400).send(err.toString());
         return next(err);
       }
 

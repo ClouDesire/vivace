@@ -35,7 +35,7 @@ describe('loading express', () => {
         res.body.LightMuted.rgb.should.containDeep([153, 170, 171]);
         done();
       });
-  });
+  }).timeout(5000);
 
   it('responds to preflight cors requests', (done) => {
     request(server)
@@ -64,9 +64,9 @@ describe('loading express', () => {
       .expect(404, done);
   });
 
-  it('500 when not 200 or 300', (done) => {
+  it('400 when not 200 or 300', (done) => {
     request(server)
       .get('/?imgUrl=https://httpbin.org/status/418')
-      .expect(500, done);
+      .expect(400, done);
   }).timeout(5000);
 });
